@@ -24,8 +24,8 @@ for i in range(0, 11):
     graph[node] = neighbors
 
 # 횡단보도와 신호등 변수 설정
-crosswalk_prob = 0  # 횡단보도가 있는 확률
-traffic_light_prob = 0  # 신호등이 있는 확률
+crosswalk_prob = 0.1  # 횡단보도가 있는 확률
+traffic_light_prob = 0.1  # 신호등이 있는 확률
 
 # 각 도로에 횡단보도와 신호등 설정
 for i in range(0, 11):
@@ -89,4 +89,4 @@ def dijkstra(graph, start, end):
 shortest_time = dijkstra(graph, start_point, waypoint) + dijkstra(graph, waypoint, end_point)
 print(dijkstra(graph, start_point, waypoint))
 print(dijkstra(graph, waypoint, end_point))
-print(f"{start_point}에서 {waypoint}를 거쳐 {end_point}까지의 최단 시간은 {shortest_time}분입니다.")
+print(f"({start_point})에서 ({waypoint})를 거쳐 ({end_point})까지의 최단 시간은 {shortest_time}분입니다.")
