@@ -32,14 +32,12 @@ for i in range(0, 11):
   for j in range(0, 11):
     node = f'{i},{j}'
     for neighbor in graph[node]:
-      print(graph[node][neighbor])
       if random.random() < crosswalk_prob:
         graph[node][neighbor] += 1
         code.drawDot(ctx, 54 * i, 54 * (10 - j), 5, "rgb(0, 255, 0)")
       if random.random() < traffic_light_prob:
         graph[node][neighbor] += 1
         code.drawDot(ctx, 54 * i, 54 * (10 - j), 5, "rgb(0, 255, 0)")
-      print(graph[node][neighbor])
 
 
 sran1 = random.randint(0, 1)
@@ -78,6 +76,7 @@ def dijkstra(graph, start, end):
     for neighbor, time in graph[current_vertex].items():
       total_time = current_time + time
       # 더 짧은 시간을 발견한 경우 업데이트
+      print(times[neighbor])
       if total_time < times[neighbor]:
         times[neighbor] = total_time
         #print(neighbor.split(",")[0])
