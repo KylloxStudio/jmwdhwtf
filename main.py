@@ -3,7 +3,7 @@ import random
 from pyscript import window, document
 from pyscript.js_modules import code
 
-canvas = document.getElementById("boardCanvas");
+canvas = document.getElementById("boardCanvas")
 ctx = canvas.getContext("2d")
 
 # 도로 그래프 생성
@@ -32,6 +32,7 @@ for i in range(0, 11):
   for j in range(0, 11):
     node = f'{i},{j}'
     for neighbor in graph[node]:
+      print(graph[node][neighbor])
       if random.random() < crosswalk_prob:
         graph[node][neighbor] += 1
         code.drawDot(ctx, 54 * i, 54 * (10 - j), 5, "rgb(0, 255, 0)")
