@@ -39,6 +39,7 @@ for i in range(0, 11):
       if random.random() < traffic_light_prob:
         graph[node][neighbor] += 1
         code.drawDot(ctx, 54 * i, 54 * (10 - j), 5, "rgb(0, 255, 0)")
+      print(graph[node][neighbor])
 
 
 sran1 = random.randint(0, 1)
