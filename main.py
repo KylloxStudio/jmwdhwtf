@@ -7,51 +7,53 @@ canvas = document.getElementById("boardCanvas")
 ctx = canvas.getContext("2d")
 
 def generate_grid(size):
-    return [[0 for _ in range(size)] for _ in range(size)]
+  return [[0 for _ in range(size)] for _ in range(size)]
 
 def place_obstacles(grid, num_obstacles):
-    size = len(grid)
-    for _ in range(num_obstacles):
-        x, y = random.randint(0, size - 1), random.randint(0, size - 1)
-        grid[x][y] = 1  # 1 represents an obstacle (signal or crosswalk)
+  size = len(grid)
+  for _ in range(num_obstacles):
+    x, y = random.randint(0, size - 1), random.randint(0, size - 1)
+    grid[x][y] = 1  # 1 represents an obstacle (signal or crosswalk)
 
 def heuristic(a, b):
-    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+  return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 def a_star(grid, start, goal):
-    size = len(grid)
-    open_list = [(0, start)]
-    heapq.heapify(open_list)
-    came_from = {}
-    g_score = { (i, j): float('inf') for i in range(size) for j in range(size) }
-    g_score[start] = 0
-    f_score = { (i, j): float('inf') for i in range(size) for j in range(size) }
-    f_score[start] = heuristic(start, goal)
+  size = len(grid)
+  open_list = [(0, start)]
+  heapq.heapify(open_list)
+  came_from = {}
+  g_score = {(i, j): float("inf") for i in range(size) for j in range(size)}
+  g_score[start] = 0
+  f_score = {(i, j): float("inf") for i in range(size) for j in range(size)}
+  f_score[start] = heuristic(start, goal)
 
-    while open_list:
-        current = heapq.heappop(open_list)[1]
+  while open_list:
+    current = heapq.heappop(open_list)[1]
+    if current == goal:
+      path = []
+      while current in came_from:
+        path.append(current)
+        current = came_from[current]
+        
+      path.append(start)
+      
+      return path[::-1]  # return reversed path
 
-        if current == goal:
-            path = []
-            while current in came_from:
-                path.append(current)
-                current = came_from[current]
-            path.append(start)
-            return path[::-1]  # return reversed path
+    neighbors = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    for dx, dy in neighbors:
+      neighbor = (current[0] + dx, current[1] + dy)
+      
+      if 0 <= neighbor[0] < size and 0 <= neighbor[1] < size:
+        tentative_g_score = (g_score[current] + 1 + grid[neighbor[0]][neighbor[1]])
+        
+        if tentative_g_score < g_score[neighbor]:
+          came_from[neighbor] = current
+          g_score[neighbor] = tentative_g_score
+          f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
+          heapq.heappush(open_list, (f_score[neighbor], neighbor))
 
-        neighbors = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-        for dx, dy in neighbors:
-            neighbor = (current[0] + dx, current[1] + dy)
-            if 0 <= neighbor[0] < size and 0 <= neighbor[1] < size:
-                tentative_g_score = g_score[current] + 1 + grid[neighbor[0]][neighbor[1]]
-
-                if tentative_g_score < g_score[neighbor]:
-                    came_from[neighbor] = current
-                    g_score[neighbor] = tentative_g_score
-                    f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
-                    heapq.heappush(open_list, (f_score[neighbor], neighbor))
-
-    return None  # return None if no path is found
+  return None  # return None if no path is found
 
 size = 10
 grid = generate_grid(size)
@@ -61,30 +63,51 @@ start = (0, 0)
 waypoints = [(5, 5)]
 goal = (9, 9)
 
-code.drawDot(ctx, 54 * start[0], 54 * (10 - start[1]), 5, "rgb(0, 0, 0)")
-code.drawDot(ctx, 54 * waypoints[0][0], 54 * (10 - waypoints[0][1]), 5, "rgb(255, 0, 0)")
-code.drawDot(ctx, 54 * goal[0], 54 * (10 - goal[1]), 5, "rgb(0, 0, 255)")
+code.drawDot(
+  ctx, 54 * start[0],
+  54 * (10 - start[1]),
+  5,
+  "rgb(0, 0, 0)"
+)
+code.drawDot(
+  ctx, 54 * waypoints[0][0],
+  54 * (10 - waypoints[0][1]),
+  5,
+  "rgb(255, 0, 0)"
+)
+code.drawDot(
+  ctx, 54 * goal[0],
+  54 * (10 - goal[1]),
+  5,
+  "rgb(0, 0, 255)"
+)
 
 path = []
 current_start = start
 
 # Iterate through waypoints to form the complete path
 for wp in waypoints + [goal]:
-    sub_path = a_star(grid, current_start, wp)
-    if sub_path is None:
-        print(f"No path found to {wp}")
-        break
-    if path and sub_path:
-        path += sub_path[1:]  # avoid duplicating the waypoint
-    else:
-        path = sub_path
-    current_start = wp
+  sub_path = a_star(grid, current_start, wp)
+  if sub_path is None:
+    print(f"No path found to {wp}")
+    break
+  if path and sub_path:
+    path += sub_path[1:]  # avoid duplicating the waypoint
+  else:
+    path = sub_path
+  current_start = wp
 
 if path is not None:
-    for i in range(len(path)):
-        if len(path) > i + 1:
-            print("Path found:", path[i][0], path[i][1], path[i+1][0], path[i+1][1])
-            code.drawArrow(ctx, 54 * path[i][0], 54 * (10 - path[i][1]), 54 * path[i+1][0], 54 * (10 - path[i+1][1]), "red")
-    print("Path found:", path)
+  for i in range(len(path)):
+    if len(path) > i + 1:
+      code.drawArrow(
+        ctx,
+        54 * path[i][0],
+        54 * (10 - path[i][1]),
+        54 * path[i + 1][0],
+        54 * (10 - path[i + 1][1]),
+        "red"
+      )
+  print("Path found:", path)
 else:
-    print("No path found to goal")
+  print("No path found to goal")
