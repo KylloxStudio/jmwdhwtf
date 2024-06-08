@@ -73,20 +73,19 @@ while (start[0] - goal[0]) + (start[1] - goal[1]) <= 0:
   
 print("출발점:", str(start) + ", 경유지:", str(waypoints) + ", 도착점:", str(goal))
 
-print(start)
 code.drawDot(
   ctx,
-  45 * (start[0], + 1),
+  45 * (start[0] + 1),
   45 * (11 - start[1]),
   5,
-  "rgb(0, 0, 0)"
+  "rgb(255, 0, 0)"
 )
 code.drawDot(
   ctx,
   45 * (waypoints[0][0] + 1),
   45 * (11 - waypoints[0][1]),
   5,
-  "rgb(0, 255, 0)"
+  "rgb(0, 0, 255)"
 )
 code.drawDot(
   ctx,
@@ -123,6 +122,6 @@ if path is not None:
         "red"
       )
   print("경로:", path)
-  print("걸린 시간:", len(path) + "분")
+  print("걸린 시간:", str(len(path)) + "분")
 else:
   print("경로를 찾지 못했습니다.")
