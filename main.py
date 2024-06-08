@@ -71,9 +71,9 @@ while (start[0] == waypoints[0][0] and start[1] == waypoints[0][1]) or (goal[0] 
 while (start[0] - goal[0]) + (start[1] - goal[1]) <= 0:
   goal = (random.randint(0, 10), random.randint(0, 10))
   
-print("출발점:", start + ", 경유지:", waypoints + ", 도착점:", goal)
+print("출발점:", str(start) + ", 경유지:", str(waypoints) + ", 도착점:", str(goal))
 
-print(start[0], start[1])
+print(start)
 code.drawDot(
   ctx,
   45 * (start[0], + 1),
