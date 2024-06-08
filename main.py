@@ -6,6 +6,8 @@ from pyscript.js_modules import code
 canvas = document.getElementById("boardCanvas")
 ctx = canvas.getContext("2d")
 
+print("Initializing...")
+
 def generate_grid(size):
   return [[0 for _ in range(size)] for _ in range(size)]
 
@@ -63,9 +65,13 @@ start = (random.randint(0, 5), random.randint(0, 5))
 waypoints = [(random.randint(2, 7), random.randint(2, 7))]
 goal = (random.randint(0, 10), random.randint(0, 10))
 
+while (start[0] == waypoints[0][0] and start[1] == waypoints[0][1]) or (goal[0] == waypoints[0][0] and goal[1] == waypoints[0][1]):
+  waypoints = [(random.randint(2, 7), random.randint(2, 7))]
+
 while (start[0] - goal[0]) + (start[1] - goal[1]) <= 0:
-  start = (random.randint(0, 5), random.randint(0, 5))
   goal = (random.randint(0, 10), random.randint(0, 10))
+  
+print("출발점:", start, ", 경유지:", waypoints, "도착점:", goal)
 
 code.drawDot(
   ctx,
