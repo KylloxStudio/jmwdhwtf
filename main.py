@@ -71,8 +71,9 @@ while (start[0] == waypoints[0][0] and start[1] == waypoints[0][1]) or (goal[0] 
 while (start[0] - goal[0]) + (start[1] - goal[1]) <= 0:
   goal = (random.randint(0, 10), random.randint(0, 10))
   
-print("출발점:", start, ", 경유지:", waypoints, "도착점:", goal)
+print("출발점:", start + ", 경유지:", waypoints + ", 도착점:", goal)
 
+print(start)
 code.drawDot(
   ctx,
   45 * (start[0], + 1),
@@ -122,6 +123,6 @@ if path is not None:
         "red"
       )
   print("경로:", path)
-  print("걸린 시간:", len(path))
+  print("걸린 시간:", len(path) + "분")
 else:
   print("경로를 찾지 못했습니다.")
