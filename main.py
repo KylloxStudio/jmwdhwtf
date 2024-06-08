@@ -78,7 +78,7 @@ code.drawDot(
   45 * (start[0], + 1),
   45 * (11 - start[1]),
   5,
-  "rgb(255, 255, 255)"
+  "rgb(0, 0, 0)"
 )
 code.drawDot(
   ctx,
