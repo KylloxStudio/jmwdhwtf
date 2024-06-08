@@ -61,8 +61,8 @@ size = 10
 grid = generate_grid(size)
 place_obstacles(grid, 20)  # Place 20 random obstacles
 
-start = (random.randint(0, 5), random.randint(0, 5))
-waypoints = [(random.randint(2, 7), random.randint(2, 7))]
+start = (random.randint(0, 10), random.randint(0, 10))
+waypoints = [(random.randint(0, 10), random.randint(0, 10))]
 goal = (random.randint(0, 10), random.randint(0, 10))
 
 while (start[0] == waypoints[0][0] and start[1] == waypoints[0][1]) or (goal[0] == waypoints[0][0] and goal[1] == waypoints[0][1]):
