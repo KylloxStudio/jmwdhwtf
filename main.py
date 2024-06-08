@@ -121,6 +121,7 @@ if path is not None:
         45 * (11 - path[i + 1][1]),
         "red"
       )
-  print("Path found:", path)
+  print("경로:", path)
+  print("걸린 시간:", len(path))
 else:
-  print("No path found to goal")
+  print("경로를 찾지 못했습니다.")
