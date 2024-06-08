@@ -59,27 +59,34 @@ size = 10
 grid = generate_grid(size)
 place_obstacles(grid, 20)  # Place 20 random obstacles
 
-start = (0, 0)
-waypoints = [(5, 5)]
-goal = (9, 9)
+start = (random.randint(0, 5), random.randint(0, 5))
+waypoints = [(random.randint(2, 7), random.randint(2, 7))]
+goal = (random.randint(0, 10), random.randint(0, 10))
+
+while (start[0] - goal[0]) + (start[1] - goal[1]) <= 0:
+  start = (random.randint(0, 5), random.randint(0, 5))
+  goal = (random.randint(0, 10), random.randint(0, 10))
 
 code.drawDot(
-  ctx, 45 * (start[0], + 1),
+  ctx,
+  45 * (start[0], + 1),
   45 * (11 - start[1]),
   5,
-  "rgb(0, 0, 0)"
+  "rgb(255, 255, 255)"
 )
 code.drawDot(
-  ctx, 45 * (waypoints[0][0] + 1),
+  ctx,
+  45 * (waypoints[0][0] + 1),
   45 * (11 - waypoints[0][1]),
   5,
-  "rgb(255, 0, 0)"
+  "rgb(0, 255, 0)"
 )
 code.drawDot(
-  ctx, 45 * (goal[0] + 1),
+  ctx,
+  45 * (goal[0] + 1),
   45 * (11 - goal[1]),
   5,
-  "rgb(0, 0, 255)"
+  "rgb(255, 0, 0)"
 )
 
 path = []

@@ -21,5 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const boardSize = 12; // 도로 크기
   const cellSize = canvas.width / boardSize;
 
+  ctx.fillText("(0, 0)", 20, 505);
+  ctx.fillText("(10, 10)", 500, 40);
+
   drawBoard(ctx, canvas, boardSize, cellSize);
 });
