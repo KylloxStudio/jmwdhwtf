@@ -64,20 +64,20 @@ waypoints = [(5, 5)]
 goal = (9, 9)
 
 code.drawDot(
-  ctx, 54 * start[0],
-  54 * (10 - start[1]),
+  ctx, 45 * (start[0], + 1),
+  45 * (11 - start[1]),
   5,
   "rgb(0, 0, 0)"
 )
 code.drawDot(
-  ctx, 54 * waypoints[0][0],
-  54 * (10 - waypoints[0][1]),
+  ctx, 45 * (waypoints[0][0] + 1),
+  45 * (11 - waypoints[0][1]),
   5,
   "rgb(255, 0, 0)"
 )
 code.drawDot(
-  ctx, 54 * goal[0],
-  54 * (10 - goal[1]),
+  ctx, 45 * (goal[0] + 1),
+  45 * (11 - goal[1]),
   5,
   "rgb(0, 0, 255)"
 )
@@ -102,10 +102,10 @@ if path is not None:
     if len(path) > i + 1:
       code.drawArrow(
         ctx,
-        54 * path[i][0],
-        54 * (10 - path[i][1]),
-        54 * path[i + 1][0],
-        54 * (10 - path[i + 1][1]),
+        45 * (path[i][0] + 1),
+        45 * (11 - path[i][1]),
+        45 * (path[i + 1][0] + 1),
+        45 * (11 - path[i + 1][1]),
         "red"
       )
   print("Path found:", path)

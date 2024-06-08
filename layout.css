@@ -63,4 +63,5 @@ section {
 
 #boardCanvas {
   display: inline-block;
+  outline: solid 2px #000;
 }
