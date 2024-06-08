@@ -73,7 +73,7 @@ while (start[0] - goal[0]) + (start[1] - goal[1]) <= 0:
   
 print("출발점:", start + ", 경유지:", waypoints + ", 도착점:", goal)
 
-print(start)
+print(start[0], start[1])
 code.drawDot(
   ctx,
   45 * (start[0], + 1),
