@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const canvas = document.getElementById("boardCanvas");
   const ctx = canvas.getContext("2d");
 
-  const boardSize = 11; // 도로 크기
+  const boardSize = 12; // 도로 크기
   const cellSize = canvas.width / boardSize;
 
   drawBoard(ctx, canvas, boardSize, cellSize);
